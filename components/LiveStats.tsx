@@ -23,14 +23,14 @@ export default function LiveStats() {
         where("uid", "==", user.uid)
       );
 
-      const unsubscribe = onSnapshot(q, (snapshot) => {
+      const unsubscribeSnapshot = onSnapshot(q, (snapshot) => {
         const tasks = snapshot.docs.map((doc) => doc.data());
 
         setTotal(tasks.length);
         setCompleted(tasks.filter((task: any) => task.completed).length);
       });
 
-      return unsubscribe;
+      return unsubscribeSnapshot;
     });
 
     return unsubscribeAuth;

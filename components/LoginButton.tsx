@@ -11,37 +11,40 @@ import {
 
 export default function LoginButton() {
   const [user, setUser] = useState<User | null>(null);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
     });
 
-    return () => unsubscribe();
+    return unsubscribe;
   }, []);
 
-  // ✅ Login ho chuka hai to button mat dikhao
   if (user) return null;
 
   async function login() {
+    setLoading(true);
+
     try {
       const provider = new GoogleAuthProvider();
 
-      const result = await signInWithPopup(auth, provider);
-
-      alert(`Welcome ${result.user.displayName}! 🎉`);
+      await signInWithPopup(auth, provider);
     } catch (error) {
       console.error(error);
-      alert("Login failed");
+      alert("Login failed.");
+    } finally {
+      setLoading(false);
     }
   }
 
   return (
     <button
       onClick={login}
-      className="bg-blue-600 hover:bg-blue-700 px-6 py-3 rounded-xl font-semibold transition"
+      disabled={loading}
+      className="bg-blue-600 hover:bg-blue-700 disabled:bg-gray-700 disabled:cursor-not-allowed px-6 py-3 rounded-xl font-semibold transition shadow-lg"
     >
-      Sign in with Google
+      {loading ? "Signing in..." : "🚀 Continue with Google"}
     </button>
   );
 }

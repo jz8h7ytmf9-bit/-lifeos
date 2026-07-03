@@ -59,7 +59,7 @@ export default function AddTask() {
           onClick={addTask}
           className="bg-blue-600 hover:bg-blue-700 px-6 py-3 rounded-lg font-semibold transition"
         >
-          Add
+         ➕ Add Task
         </button>
       </div>
     </div>

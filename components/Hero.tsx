@@ -1,6 +1,33 @@
+"use client";
+
+import { useRouter } from "next/navigation";
+import { auth } from "@/lib/firebase";
+import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+
 export default function Hero() {
+  const router = useRouter();
+
+  async function handleGetStarted() {
+    if (auth.currentUser) {
+      router.push("/dashboard");
+      return;
+    }
+
+    try {
+      const provider = new GoogleAuthProvider();
+
+      await signInWithPopup(auth, provider);
+
+      router.push("/dashboard");
+    } catch (error) {
+      console.error(error);
+      alert("Login failed");
+    }
+  }
+
   return (
     <section className="relative overflow-hidden min-h-screen bg-gradient-to-b from-black via-gray-950 to-black text-white flex items-center">
+
       {/* Background Glow */}
       <div className="absolute top-20 left-20 h-72 w-72 rounded-full bg-blue-600/20 blur-3xl"></div>
       <div className="absolute bottom-20 right-20 h-72 w-72 rounded-full bg-purple-600/20 blur-3xl"></div>
@@ -30,23 +57,32 @@ export default function Hero() {
             beautiful dashboard.
           </p>
 
+          {/* Buttons */}
           <div className="flex flex-wrap gap-4 mt-10">
-            <button className="bg-blue-600 hover:bg-blue-700 transition px-8 py-4 rounded-xl font-semibold shadow-lg">
+
+            <button
+              onClick={handleGetStarted}
+              className="bg-blue-600 hover:bg-blue-700 hover:scale-105 transition-all duration-300 px-8 py-4 rounded-xl font-semibold shadow-lg"
+            >
               🚀 Get Started
             </button>
 
-            <button className="border border-gray-700 hover:bg-gray-900 transition px-8 py-4 rounded-xl">
+            <a
+              href="#features"
+              className="border border-gray-700 hover:bg-gray-900 hover:scale-105 transition-all duration-300 px-8 py-4 rounded-xl"
+            >
               📖 Learn More
-            </button>
+            </a>
+
           </div>
 
-          <div className="flex items-center gap-6 mt-12 text-gray-400">
+          {/* Stats */}
+          <div className="flex items-center gap-10 mt-14 text-gray-400">
 
             <div>
               <h3 className="text-3xl font-bold text-white">
                 100%
               </h3>
-
               <p>Free</p>
             </div>
 
@@ -54,7 +90,6 @@ export default function Hero() {
               <h3 className="text-3xl font-bold text-white">
                 Firebase
               </h3>
-
               <p>Powered</p>
             </div>
 
@@ -62,7 +97,6 @@ export default function Hero() {
               <h3 className="text-3xl font-bold text-white">
                 AI
               </h3>
-
               <p>Ready</p>
             </div>
 
@@ -73,7 +107,7 @@ export default function Hero() {
         {/* Right Side */}
         <div className="relative">
 
-          <div className="bg-gray-900/80 backdrop-blur-xl border border-gray-800 rounded-3xl p-8 shadow-2xl">
+          <div className="bg-gray-900/80 backdrop-blur-xl border border-gray-800 rounded-3xl p-8 shadow-2xl hover:scale-[1.02] transition duration-300">
 
             <h2 className="text-2xl font-bold mb-6">
               📊 Dashboard Preview
@@ -100,7 +134,7 @@ export default function Hero() {
                 </span>
               </div>
 
-              <div className="bg-blue-600 rounded-xl p-4 mt-6">
+              <div className="bg-blue-600 rounded-xl p-4 mt-6 text-center font-semibold">
                 🤖 AI Assistant Ready
               </div>
 
@@ -111,6 +145,7 @@ export default function Hero() {
         </div>
 
       </div>
+
     </section>
   );
 }

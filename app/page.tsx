@@ -1,13 +1,17 @@
-import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
+import Footer from "@/components/Footer";
+
 export default function Home() {
   return (
-  <>
-    <Navbar />
-    <Hero />
+    <>
+      <Navbar />
+      <Hero />
 
-<section className="bg-black text-white py-28 px-6">
+      <section
+        id="features"
+        className="bg-black text-white py-28 px-6"
+      >
   <div className="max-w-7xl mx-auto">
 
     <div className="text-center">

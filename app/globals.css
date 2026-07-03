@@ -24,3 +24,10 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+body {
+  background:
+    radial-gradient(circle at top left, rgba(59,130,246,.15), transparent 30%),
+    radial-gradient(circle at bottom right, rgba(168,85,247,.15), transparent 30%),
+    #000;
+}

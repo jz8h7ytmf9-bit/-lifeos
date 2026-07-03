@@ -1,11 +1,51 @@
+"use client";
+
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+
 export default function Sidebar() {
+  const pathname = usePathname();
+
+  const menu = [
+    {
+      name: "Dashboard",
+      icon: "🏠",
+      href: "/dashboard",
+    },
+    {
+      name: "Tasks",
+      icon: "📋",
+      href: "/tasks",
+    },
+    {
+      name: "Notes",
+      icon: "📝",
+      href: "/notes",
+    },
+    {
+      name: "AI Assistant",
+      icon: "🤖",
+      href: "/ai",
+    },
+    {
+      name: "Calendar",
+      icon: "📅",
+      href: "/calendar",
+    },
+    {
+      name: "Settings",
+      icon: "⚙️",
+      href: "/settings",
+    },
+  ];
+
   return (
     <aside className="w-72 min-h-screen bg-gradient-to-b from-gray-950 to-black border-r border-gray-800 flex flex-col justify-between p-6">
 
       {/* Logo */}
       <div>
 
-        <div className="flex items-center gap-3">
+        <Link href="/" className="flex items-center gap-3">
 
           <div className="w-12 h-12 rounded-2xl bg-blue-600 flex items-center justify-center text-2xl font-bold shadow-lg">
             ⚡
@@ -21,37 +61,32 @@ export default function Sidebar() {
             </p>
           </div>
 
-        </div>
+        </Link>
 
         {/* Navigation */}
         <nav className="mt-12 space-y-3">
 
-          <button className="w-full flex items-center gap-3 bg-blue-600 hover:bg-blue-700 transition rounded-xl px-4 py-3 text-left font-semibold">
-            🏠 Dashboard
-          </button>
+          {menu.map((item) => (
 
-          <button className="w-full flex items-center gap-3 hover:bg-gray-800 transition rounded-xl px-4 py-3 text-left">
-            📋 Tasks
-          </button>
+            <Link
+              key={item.href}
+              href={item.href}
+              className={`flex items-center gap-3 rounded-xl px-4 py-3 transition-all duration-300 ${
+                pathname === item.href
+                  ? "bg-blue-600 text-white shadow-lg"
+                  : "hover:bg-gray-800 text-gray-300"
+              }`}
+            >
+              <span className="text-xl">
+                {item.icon}
+              </span>
 
-          <button className="w-full flex items-center gap-3 hover:bg-gray-800 transition rounded-xl px-4 py-3 text-left">
-            📝 Notes
-          </button>
+              <span className="font-medium">
+                {item.name}
+              </span>
+            </Link>
 
-          <button className="w-full flex items-center gap-3 hover:bg-gray-800 transition rounded-xl px-4 py-3 text-left">
-            📊 Overview
-          </button>
-
-          <button className="w-full flex items-center gap-3 hover:bg-gray-800 transition rounded-xl px-4 py-3 text-left">
-            🤖 AI Assistant
-            <span className="ml-auto text-xs bg-yellow-500 text-black px-2 py-1 rounded-full">
-              Soon
-            </span>
-          </button>
-
-          <button className="w-full flex items-center gap-3 hover:bg-gray-800 transition rounded-xl px-4 py-3 text-left">
-            ⚙️ Settings
-          </button>
+          ))}
 
         </nav>
 
