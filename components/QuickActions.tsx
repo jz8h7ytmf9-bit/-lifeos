@@ -1,45 +1,97 @@
 "use client";
 
-export default function QuickActions() {
-  const actions = [
-    {
-      title: "New Task",
-      icon: "📋",
-      color: "bg-blue-600 hover:bg-blue-700",
-    },
-    {
-      title: "New Note",
-      icon: "📝",
-      color: "bg-green-600 hover:bg-green-700",
-    },
-    {
-      title: "AI Assistant",
-      icon: "🤖",
-      color: "bg-purple-600 hover:bg-purple-700",
-    },
-    {
-      title: "Calendar",
-      icon: "📅",
-      color: "bg-orange-600 hover:bg-orange-700",
-    },
-  ];
+import { useRouter } from "next/navigation";
 
+export default function QuickActions() {
+  const router = useRouter();
+
+  const actions = [
+  {
+    title: "New Task",
+    icon: "📋",
+    subtitle: "Manage Tasks",
+    gradient: "from-blue-600 to-cyan-500",
+    route: "/dashboard/tasks",
+  },
+  {
+    title: "New Note",
+    icon: "📝",
+    subtitle: "Write Notes",
+    gradient: "from-green-600 to-emerald-500",
+    route: "/dashboard/notes",
+  },
+  {
+    title: "AI Assistant",
+    icon: "🤖",
+    subtitle: "Ask Anything",
+    gradient: "from-purple-600 to-pink-500",
+    route: "/dashboard/ai",
+  },
+  {
+    title: "Calendar",
+    icon: "📅",
+    subtitle: "Coming Soon",
+    gradient: "from-orange-500 to-red-500",
+    route: "/dashboard/calendar",
+  },
+];
   return (
-    <div className="grid grid-cols-2 md:grid-cols-4 gap-5">
+    <div className="grid grid-cols-2 xl:grid-cols-4 gap-5">
+
       {actions.map((action) => (
+
         <button
           key={action.title}
-          className={`${action.color} rounded-2xl p-6 transition-all duration-300 hover:scale-105 shadow-xl`}
+          onClick={() => router.push(action.route)}
+          className={`
+          relative
+          overflow-hidden
+          rounded-3xl
+          bg-gradient-to-br
+          ${action.gradient}
+          p-6
+          shadow-2xl
+          transition-all
+          duration-300
+          hover:scale-105
+          active:scale-95
+          text-left
+          `}
         >
-          <div className="text-4xl mb-3">
-            {action.icon}
+
+          {/* Glow */}
+          <div className="absolute -right-8 -top-8 w-24 h-24 rounded-full bg-white/10 blur-2xl" />
+
+          <div className="relative z-10">
+
+            <div className="text-5xl">
+              {action.icon}
+            </div>
+
+            <h2 className="mt-6 text-xl font-bold">
+              {action.title}
+            </h2>
+
+            <p className="text-white/80 mt-2 text-sm">
+              {action.subtitle}
+            </p>
+
+            <div className="mt-6 inline-flex items-center gap-2 text-sm font-semibold">
+
+              Open
+
+              <span>
+                →
+              </span>
+
+            </div>
+
           </div>
 
-          <p className="font-semibold text-lg">
-            {action.title}
-          </p>
         </button>
+
       ))}
+
     </div>
   );
 }

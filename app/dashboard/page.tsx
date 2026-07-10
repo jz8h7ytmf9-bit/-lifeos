@@ -98,9 +98,9 @@ export default function Dashboard() {
 
       <Sidebar />
 
-      <main className="flex-1 overflow-y-auto">
+      <main className="flex-1 overflow-y-auto pt-16 lg:pt-0">
 
-        <div className="max-w-7xl mx-auto px-6 md:px-10 py-10">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10 py-6 lg:py-10">
 
           <DashboardHero
             user={user}

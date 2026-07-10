@@ -30,10 +30,11 @@ export default function LoginButton() {
       const provider = new GoogleAuthProvider();
 
       await signInWithPopup(auth, provider);
-    } catch (error) {
-      console.error(error);
-      alert("Login failed.");
-    } finally {
+    } catch (error: any) {
+  console.error("Firebase Error:", error);
+  alert(error.code + "\n\n" + error.message);
+}
+     finally {
       setLoading(false);
     }
   }

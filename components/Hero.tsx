@@ -8,23 +8,18 @@ export default function Hero() {
   const router = useRouter();
 
   async function handleGetStarted() {
-    if (auth.currentUser) {
-      router.push("/dashboard");
-      return;
-    }
-
-    try {
+  try {
+    if (!auth.currentUser) {
       const provider = new GoogleAuthProvider();
-
       await signInWithPopup(auth, provider);
-
-      router.push("/dashboard");
-    } catch (error) {
-      console.error(error);
-      alert("Login failed");
     }
-  }
 
+    window.location.href = "/dashboard";
+  } catch (error) {
+    console.error(error);
+    alert("Login failed");
+  }
+}
   return (
     <section className="relative overflow-hidden min-h-screen bg-gradient-to-b from-black via-gray-950 to-black text-white flex items-center">
 

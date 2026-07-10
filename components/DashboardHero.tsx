@@ -16,81 +16,125 @@ export default function DashboardHero({
   formattedTime,
 }: Props) {
   return (
-    <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-r from-blue-600/20 via-indigo-600/10 to-purple-600/20 backdrop-blur-xl p-8 shadow-2xl">
+    <section className="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-br from-[#111827] via-[#0f172a] to-[#1e293b] shadow-2xl">
 
       {/* Background Glow */}
-      <div className="absolute -top-16 -right-16 w-56 h-56 bg-blue-500/20 blur-3xl rounded-full"></div>
-      <div className="absolute -bottom-20 -left-20 w-56 h-56 bg-purple-500/20 blur-3xl rounded-full"></div>
+      <div className="absolute -top-20 -left-20 w-72 h-72 bg-blue-500/20 rounded-full blur-3xl" />
+      <div className="absolute -bottom-20 -right-20 w-72 h-72 bg-purple-500/20 rounded-full blur-3xl" />
 
-      <div className="relative z-10 grid lg:grid-cols-2 gap-8 items-center">
+      <div className="relative z-10 p-6 md:p-10">
 
-        {/* Left */}
-        <div>
+        <div className="grid lg:grid-cols-2 gap-10 items-center">
 
-          <p className="text-blue-400 font-semibold uppercase tracking-widest">
-            Welcome Back
-          </p>
+          {/* LEFT */}
 
-          <h1 className="text-5xl md:text-6xl font-extrabold mt-4">
-            {greeting},{" "}
-            <span className="text-blue-400">
-              {user.displayName?.split(" ")[0]}
-            </span>{" "}
-            👋
-          </h1>
+          <div>
 
-          <p className="text-gray-300 mt-6 text-lg">
-            {formattedDate}
-          </p>
+            <span className="inline-flex items-center gap-2 bg-blue-500/10 border border-blue-500/20 text-blue-400 px-4 py-2 rounded-full text-sm font-semibold">
+              👋 Welcome Back
+            </span>
 
-          <p className="text-4xl font-bold mt-2">
-            {formattedTime}
-          </p>
+            <h1 className="mt-6 text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-tight">
 
-          <p className="text-gray-400 mt-6 text-lg leading-8 max-w-xl">
-            Stay productive, organize your work, complete your goals and
-            build consistency every single day.
-          </p>
+              {greeting},
 
-        </div>
+              <br />
 
-        {/* Right Stats */}
-        <div className="grid grid-cols-3 gap-4">
+              <span className="text-blue-400">
+                {user.displayName?.split(" ")[0]}
+              </span>
 
-          <div className="bg-white/5 border border-white/10 rounded-2xl p-5 text-center">
-            <h3 className="text-3xl">🔥</h3>
-            <p className="mt-3 text-3xl font-bold">
-              7
+            </h1>
+
+            <div className="mt-6 space-y-2">
+
+              <p className="text-gray-400 text-base md:text-lg">
+                📅 {formattedDate}
+              </p>
+
+              <h2 className="text-3xl md:text-4xl font-bold text-white">
+                🕒 {formattedTime}
+              </h2>
+
+            </div>
+
+            <p className="mt-6 text-gray-300 text-base md:text-lg leading-8 max-w-xl">
+              Stay productive, organize your work, finish your daily goals
+              and build consistency every single day.
             </p>
-            <p className="text-gray-400 text-sm">
-              Day Streak
-            </p>
+
+            <div className="flex flex-wrap gap-4 mt-8">
+
+              <button className="bg-blue-600 hover:bg-blue-500 transition px-6 py-3 rounded-xl font-semibold shadow-lg">
+                🚀 Continue Working
+              </button>
+
+              <button className="border border-gray-700 hover:border-blue-500 hover:bg-white/5 transition px-6 py-3 rounded-xl">
+                📊 View Analytics
+              </button>
+
+            </div>
+
           </div>
 
-          <div className="bg-white/5 border border-white/10 rounded-2xl p-5 text-center">
-            <h3 className="text-3xl">📋</h3>
-            <p className="mt-3 text-3xl font-bold">
-              2
-            </p>
-            <p className="text-gray-400 text-sm">
-              Tasks Left
-            </p>
-          </div>
+          {/* RIGHT */}
 
-          <div className="bg-white/5 border border-white/10 rounded-2xl p-5 text-center">
-            <h3 className="text-3xl">🚀</h3>
-            <p className="mt-3 text-3xl font-bold">
-              92%
-            </p>
-            <p className="text-gray-400 text-sm">
-              Productivity
-            </p>
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
+
+            <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6 text-center hover:scale-105 transition">
+
+              <div className="text-5xl">
+                🔥
+              </div>
+
+              <h2 className="mt-4 text-4xl font-bold">
+                7
+              </h2>
+
+              <p className="text-gray-400 mt-2">
+                Day Streak
+              </p>
+
+            </div>
+
+            <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6 text-center hover:scale-105 transition">
+
+              <div className="text-5xl">
+                📋
+              </div>
+
+              <h2 className="mt-4 text-4xl font-bold">
+                2
+              </h2>
+
+              <p className="text-gray-400 mt-2">
+                Tasks Left
+              </p>
+
+            </div>
+
+            <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6 text-center hover:scale-105 transition">
+
+              <div className="text-5xl">
+                🚀
+              </div>
+
+              <h2 className="mt-4 text-4xl font-bold">
+                92%
+              </h2>
+
+              <p className="text-gray-400 mt-2">
+                Productivity
+              </p>
+
+            </div>
+
           </div>
 
         </div>
 
       </div>
 
-    </div>
+    </section>
   );
 }
