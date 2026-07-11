@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { auth } from "@/lib/firebase";
@@ -31,22 +32,29 @@ export default function Navbar() {
       <div className="max-w-7xl mx-auto flex items-center justify-between px-6 py-5">
 
         {/* Logo */}
-        <Link href="/" className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-xl bg-blue-600 flex items-center justify-center text-xl font-bold shadow-lg">
-            ⚡
-          </div>
+        <Link href="/" className="flex items-center gap-4">
 
-          <div>
-            <h1 className="text-2xl font-bold text-white">
-              LifeOS
-            </h1>
+ <Image
+  src="/logo.png"
+  alt="LifeOS Logo"
+  width={60}
+  height={60}
+  priority
+  className="h-14 w-auto rounded-xl"
+/>
+  <div>
 
-            <p className="text-xs text-gray-400">
-              Productivity Workspace
-            </p>
-          </div>
-        </Link>
+    <h1 className="text-2xl font-bold text-white">
+      LifeOS
+    </h1>
 
+    <p className="text-xs text-gray-400">
+      Everything you need.
+    </p>
+
+  </div>
+
+</Link>
         {/* Navigation */}
         <div className="hidden md:flex items-center gap-8 text-gray-300">
           <Link href="/" className="hover:text-blue-400 transition">

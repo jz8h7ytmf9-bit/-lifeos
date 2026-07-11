@@ -7,7 +7,7 @@ import {
   serverTimestamp,
 } from "firebase/firestore";
 
-import { db } from "./firebase";
+import { db } from "@/lib/firebase";
 
 export type ChatMessage = {
   role: "user" | "assistant";
@@ -16,19 +16,40 @@ export type ChatMessage = {
 
 export async function saveMessage(
   uid: string,
+  chatId: string,
   role: "user" | "assistant",
   content: string
 ) {
-  await addDoc(collection(db, "users", uid, "messages"), {
-    role,
-    content,
-    createdAt: serverTimestamp(),
-  });
+  await addDoc(
+    collection(
+      db,
+      "users",
+      uid,
+      "chats",
+      chatId,
+      "messages"
+    ),
+    {
+      role,
+      content,
+      createdAt: serverTimestamp(),
+    }
+  );
 }
 
-export async function loadMessages(uid: string) {
+export async function loadMessages(
+  uid: string,
+  chatId: string
+) {
   const q = query(
-    collection(db, "users", uid, "messages"),
+    collection(
+      db,
+      "users",
+      uid,
+      "chats",
+      chatId,
+      "messages"
+    ),
     orderBy("createdAt", "asc")
   );
 
